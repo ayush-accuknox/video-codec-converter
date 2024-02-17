@@ -58,7 +58,12 @@ app.post('/upload', upload.single('video'), (req, res) => {
       res.status(500).send('Error during conversion.');
     });
 
-  console.log('FFmpeg command:', command.toString());
+    let commandString = `${ffmpegPath} -i ${filePath} -r ${fps} -s ${Width}x${Height} -c:v libx264 ${outputFileName}`;
+console.log('FFmpeg command:', commandString);
+
+  //   console.log('FFmpeg path:', ffmpegPath);
+  //   console.log('Command:', command);
+  // console.log('FFmpeg command:', command.toString());
   command.run();
 });
 
