@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Converter</title>
+
+</head>
+<body>
+  <h1>Video Converter</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="video" accept="video/*" required>
+    <label for="fps">FPS (Frames Per Second):</label>
+    <input type="number" name="fps" id="fps" min="1" value="30" required>
+    <button type="submit">Convert Video</button>
+  </form>
+</body>
+</html>
