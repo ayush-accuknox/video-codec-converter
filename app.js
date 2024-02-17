@@ -19,18 +19,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload', upload.single('video'), (req, res) => {
-  const { file, body: { fps }  } = req;
+  const { file, body: { fps, Height, Width, format}  } = req;
 
   if (!file) {
     return res.status(400).send('No file uploaded.');
   }
-  if (!fps || isNaN(fps) || fps <= 0) {
+  if (!fps || isNaN(fps) || fps <= 0 || !Width || !Height) {
     return res.status(400).send('Invalid FPS value.');
   }
 
-  const outputFileName = 'output.mp4';
-//   const fps = 30;
-  const resolution = '640x480';
+  const outputFormat = format || 'mp4'; // Default to MP4 format
+  const outputFileName = `output.${outputFormat}`;
+  // const fps = 30;
+  // const resolution = '640x480';
 
   const filePath = path.join(__dirname, 'uploads', file.originalname);
   fs.writeFileSync(filePath, file.buffer);
@@ -42,7 +43,7 @@ app.post('/upload', upload.single('video'), (req, res) => {
     .output(outputFileName)
     .videoCodec('libx264')
     .outputOption(`-r ${fps}`)
-    .outputOption(`-s ${resolution}`)
+    .outputOption(`-s ${Width}x${Height}`)
     .on('end', () => {
       console.log('Conversion finished.');
       res.download(outputFileName, () => {
