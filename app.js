@@ -36,7 +36,7 @@ app.post('/upload', upload.single('video'), (req, res) => {
   const filePath = path.join(__dirname, 'uploads', file.originalname);
   fs.writeFileSync(filePath, file.buffer);
 
-  const ffmpegPath = 'FFmpeg Converter/bin/ffmpeg.exe'; // Provide the correct path to FFmpeg executable
+  const ffmpegPath = "FFmpeg Converter/bin/ffmpeg.exe"; // Provide the correct path to FFmpeg executable
   const command = ffmpeg()
     .setFfmpegPath(ffmpegPath)
     .input(filePath)
