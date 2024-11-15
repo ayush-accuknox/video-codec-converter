@@ -1,0 +1,11 @@
+1. Change CODEC to H.264 and FPS
+ffmpeg -i input.mp4 -r 15 -vf "scale=1280:720" -c:v libx264 output.mp4
+
+2. Change CODEC to H.265 and FPS
+ffmpeg -i input.mp4 -r 15 -vf "scale=1280:720" -c:v libx264 output.mp4
+
+3. Change CODEC to MJPEG
+ffmpeg -i input.mp4 -c:v mjpeg -q:v 2 output.avi
+
+4. To Merge Videos
+ffmpeg -f concat -i input.txt -c copy output.mp4
